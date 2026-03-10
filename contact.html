@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONTACT — PFALCON REALTY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="wordmark">
+    <span class="wm-pf">PF</span><span class="wm-alcon">ALCON</span>
+    <span class="wm-divider"></span>
+    <span class="wm-realty">REALTY</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+    <li><a href="contact.html" class="active">CONTACT</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">GET STARTED</a>
+  <button class="nav-toggle" aria-label="menu">
+    <span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu">
+  <ul>
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+    <li><a href="contact.html">CONTACT</a></li>
+    <li><a href="contact.html" class="mobile-cta">GET STARTED</a></li>
+  </ul>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-content reveal">
+    <span class="section-tag">LET'S CONNECT</span>
+    <h1>START THE<br><span class="headline-accent">CONVERSATION.</span></h1>
+  </div>
+  <div class="page-hero-line"></div>
+</section>
+
+<!-- CONTACT BODY -->
+<section class="contact-section">
+  <div class="contact-grid">
+
+    <!-- INFO -->
+    <div class="contact-info reveal">
+      <h2>REACH US DIRECTLY</h2>
+      <p>Whether you're buying, selling, or investing — we're ready to help. Reach out through any channel below or submit the form and we'll be in touch promptly.</p>
+
+      <div class="contact-details">
+        <div class="cd-item">
+          <span class="cd-label">OFFICE</span>
+          <span class="cd-value">418 N MAIN ST, STE 200<br>ROYAL OAK, MI 48067</span>
+        </div>
+        <div class="cd-item">
+          <span class="cd-label">PHONE</span>
+          <a href="tel:2482643635" class="cd-value cd-link">(248) 264-3635</a>
+        </div>
+        <div class="cd-item">
+          <span class="cd-label">WEB</span>
+          <a href="http://www.pfalconrealty.com" class="cd-value cd-link">PFALCONREALTY.COM</a>
+        </div>
+      </div>
+
+      <div class="contact-availability">
+        <div class="ca-dot"></div>
+        <span>AVAILABLE MON–SAT, 9AM–6PM EST</span>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="contact-form-wrap reveal reveal-delay-1">
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">FIRST NAME</label>
+            <input type="text" id="firstName" name="firstName" placeholder="John" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">LAST NAME</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">EMAIL ADDRESS</label>
+          <input type="email" id="email" name="email" placeholder="john@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">PHONE NUMBER</label>
+          <input type="tel" id="phone" name="phone" placeholder="(248) 000-0000">
+        </div>
+        <div class="form-group">
+          <label for="interest">I AM INTERESTED IN</label>
+          <select id="interest" name="interest">
+            <option value="">SELECT ONE...</option>
+            <option value="buying">Buying a Property</option>
+            <option value="selling">Selling a Property</option>
+            <option value="investing">Property Investment</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">MESSAGE</label>
+          <textarea id="message" name="message" rows="5" placeholder="Tell us about your real estate goals..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary btn-full">SEND MESSAGE →</button>
+        <div class="form-success" id="formSuccess">
+          ✓ MESSAGE RECEIVED — WE'LL BE IN TOUCH SHORTLY.
+        </div>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="wordmark wordmark-sm">
+        <span class="wm-pf">PF</span><span class="wm-alcon">ALCON</span>
+        <span class="wm-divider"></span>
+        <span class="wm-realty">REALTY</span>
+      </div>
+      <p>Forward-thinking real estate solutions<br>for Southeast Michigan.</p>
+    </div>
+    <div class="footer-links">
+      <span class="footer-label">NAVIGATE</span>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-contact">
+      <span class="footer-label">CONTACT</span>
+      <span>418 N MAIN ST, STE 200</span>
+      <span>ROYAL OAK, MI 48067</span>
+      <a href="tel:2482643635">(248) 264-3635</a>
+      <a href="http://www.pfalconrealty.com">PFALCONREALTY.COM</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 PFALCON REALTY. ALL RIGHTS RESERVED.</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
