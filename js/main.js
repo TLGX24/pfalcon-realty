@@ -47,17 +47,31 @@ window.addEventListener('load', () => {
 // Contact form
 const form = document.getElementById('contactForm');
 if (form) {
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const success = document.getElementById('formSuccess');
     const btn = form.querySelector('button[type="submit"]');
+    const success = document.getElementById('formSuccess');
     btn.textContent = 'SENDING...';
     btn.disabled = true;
-    setTimeout(() => {
-      success.classList.add('visible');
-      form.reset();
-      btn.textContent = 'SEND MESSAGE →';
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        success.classList.add('visible');
+        form.reset();
+      } else {
+        btn.textContent = 'ERROR — TRY AGAIN';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'ERROR — TRY AGAIN';
       btn.disabled = false;
-    }, 1000);
+    }
+    btn.textContent = 'SEND MESSAGE →';
+    btn.disabled = false;
   });
 }
