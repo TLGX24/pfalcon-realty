@@ -59,7 +59,7 @@ if (form) {
       const res = await fetch(form.action, {
         method: 'POST',
         body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
+        mode: 'no-cors'
       });
       if (res.ok) {
         success.classList.add('visible');
