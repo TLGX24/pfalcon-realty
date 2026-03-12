@@ -53,12 +53,13 @@ if (form) {
     const success = document.getElementById('formSuccess');
     btn.textContent = 'SENDING...';
     btn.disabled = true;
-    const data = new FormData(form);
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
     try {
       const res = await fetch(form.action, {
         method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
       });
       if (res.ok) {
         success.classList.add('visible');
