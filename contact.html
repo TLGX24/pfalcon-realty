@@ -620,6 +620,7 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(el => {
       if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); }
+    });
   });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
