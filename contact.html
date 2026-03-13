@@ -49,21 +49,21 @@
     animation: fadeUp 0.6s ease forwards;
   }
   .nav-logo { display: flex; flex-direction: column; line-height: 1; text-decoration: none; gap: 2px; }
-  .nav-logo-top  { font-size: 11px; font-weight: 500; letter-spacing: 0.22em; color: var(--accent); }
-  .nav-logo-bottom { font-size: 11px; font-weight: 300; letter-spacing: 0.22em; color: var(--ink); }
+  .nav-logo-top  { font-size: 15px; font-weight: 500; letter-spacing: 0.22em; color: var(--accent); }
+  .nav-logo-bottom { font-size: 15px; font-weight: 300; letter-spacing: 0.22em; color: var(--ink); }
   .nav-links { display: flex; gap: 40px; list-style: none; }
   .nav-links a {
-    font-size: 10px; font-weight: 400; letter-spacing: 0.18em;
+    font-size: 12px; font-weight: 400; letter-spacing: 0.18em;
     text-transform: uppercase; text-decoration: none;
     color: var(--muted); transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--ink); }
   .nav-links a.active { color: var(--ink); }
   .nav-cta {
-    font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.18em;
     text-transform: uppercase; text-decoration: none;
     color: var(--ink); border: 0.5px solid var(--ink);
-    padding: 8px 20px; transition: background 0.2s, color 0.2s;
+    padding: 9px 22px; transition: background 0.2s, color 0.2s;
   }
   .nav-cta:hover { background: var(--ink); color: var(--paper); }
 
@@ -472,7 +472,7 @@
 <div class="contact-body">
 
   <!-- FORM -->
-  <div class="form-col reveal">
+  <div class="form-col">
     <div class="form-title">Send a <em>message.</em></div>
 
     <form id="contact-form" onsubmit="handleSubmit(event)">
@@ -532,7 +532,7 @@
   </div>
 
   <!-- INFO -->
-  <div class="info-col reveal reveal-delay-1">
+  <div class="info-col">
 
     <div class="info-block">
       <div class="info-block-label">Our Office</div>
