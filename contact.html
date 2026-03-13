@@ -442,9 +442,9 @@
         <span class="direct-value">(248) 264-3635</span>
         <svg class="direct-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a class="direct-item" href="mailto:pmotley@pfalconrealty.com">
+      <a class="direct-item" href="/cdn-cgi/l/email-protection#a6d6cbc9d2cac3dfe6d6c0c7cac5c9c8d4c3c7cad2df88c5c9cb">
         <span class="direct-label">Email</span>
-        <span class="direct-value">pmotley@pfalconrealty.com</span>
+        <span class="direct-value"><span class="__cf_email__" data-cfemail="85f5e8eaf1e9e0fcc5f5e3e4e9e6eaebf7e0e4e9f1fcabe6eae8">[email&#160;protected]</span></span>
         <svg class="direct-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a class="direct-item" href="https://maps.google.com/?q=418+N+Main+St+Royal+Oak+MI" target="_blank">
@@ -545,9 +545,9 @@
         <span class="info-link-label">Phone</span>
         <span class="info-link-value">(248) 264-3635</span>
       </a>
-      <a class="info-link" href="mailto:pmotley@pfalconrealty.com">
+      <a class="info-link" href="/cdn-cgi/l/email-protection#2e5e43415a424b576e5e484f424d41405c4b4f425a57004d4143">
         <span class="info-link-label">Email</span>
-        <span class="info-link-value">pmotley@pfalconrealty.com</span>
+        <span class="info-link-value"><span class="__cf_email__" data-cfemail="8bfbe6e4ffe7eef2cbfbedeae7e8e4e5f9eeeae7fff2a5e8e4e6">[email&#160;protected]</span></span>
       </a>
       <a class="info-link" href="https://pfalconrealty.com" target="_blank">
         <span class="info-link-label">Web</span>
@@ -604,7 +604,7 @@
     <div class="footer-contact-label">Contact</div>
     <p class="footer-address">418 N Main St, Ste 200<br>Royal Oak, MI 48067</p>
     <a class="footer-phone" href="tel:2482643635">(248) 264-3635</a>
-    <a class="footer-phone" href="mailto:pmotley@pfalconrealty.com">pmotley@pfalconrealty.com</a>
+    <a class="footer-phone" href="/cdn-cgi/l/email-protection#03736e6c776f667a437365626f606c6d7166626f777a2d606c6e"><span class="__cf_email__" data-cfemail="285845475c444d5168584e49444b47465a4d49445c51064b4745">[email&#160;protected]</span></a>
   </div>
   <div class="footer-bottom">
     <span class="footer-copy">© 2026 PFALCON Realty. All rights reserved.</span>
@@ -615,28 +615,53 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(el => {
       if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); }
-    });
-  }, { threshold: 0.1 });
+  });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   // Form submission
   function handleSubmit(e) {
     e.preventDefault();
     const form = document.getElementById('contact-form');
+    const btn = form.querySelector('.btn-submit');
     const success = document.getElementById('form-success');
-    form.style.opacity = '0';
-    form.style.transition = 'opacity 0.4s ease';
-    setTimeout(() => {
-      form.style.display = 'none';
-      success.classList.add('visible');
-    }, 400);
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const payload = {
+      firstName: form['first-name'].value,
+      lastName:  form['last-name'].value,
+      email:     form['email'].value,
+      phone:     form['phone'].value,
+      interest:  form['inquiry'].value,
+      message:   form['message'].value
+    };
+
+    fetch('https://script.google.com/macros/s/AKfycby1A7Zo5JpwHPOZ2UHN5-wUWIsTBPy_frYhZSh9A9rFlEy3bIsR8U2AflG9oOpTICBI/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(() => {
+      form.style.opacity = '0';
+      form.style.transition = 'opacity 0.4s ease';
+      setTimeout(() => {
+        form.style.display = 'none';
+        success.classList.add('visible');
+      }, 400);
+    })
+    .catch(() => {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+      alert('Something went wrong. Please call us directly at (248) 264-3635.');
+    });
   }
 </script>
-
 </body>
 </html>
