@@ -220,7 +220,7 @@
   .hero-visual {
     position: relative;
     overflow: hidden;
-    background: #e2dfd8;
+    background: #00274C;
     opacity: 0;
     animation: fadeIn 1.2s ease 0.3s forwards;
     min-height: 400px;
@@ -231,15 +231,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.18;
+    opacity: 0.22;
   }
   .hero-visual::before {
     content: '';
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(var(--rule) 1px, transparent 1px),
-      linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+      linear-gradient(rgba(245,243,239,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,243,239,0.06) 1px, transparent 1px);
     background-size: 48px 48px;
     z-index: 1;
   }
@@ -256,7 +256,7 @@
     font-weight: 400;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: rgba(245,243,239,0.5);
     margin-bottom: 4px;
   }
   .hero-location-value {
@@ -264,7 +264,7 @@
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--ink);
+    color: #f5f3ef;
   }
 
   .hero-stats {
@@ -772,16 +772,16 @@
     <div class="hero-visual">
       <div class="falcon-geo">
         <svg width="680" height="680" viewBox="0 0 480 480" fill="none">
-          <polygon points="240,40 300,180 240,150 180,180" fill="#00274C"/>
-          <polygon points="240,150 300,180 360,320 240,260" fill="#00274C" opacity="0.7"/>
-          <polygon points="240,150 180,180 120,320 240,260" fill="#00274C" opacity="0.5"/>
-          <polygon points="240,260 360,320 300,420 240,360" fill="#00274C" opacity="0.6"/>
-          <polygon points="240,260 120,320 180,420 240,360" fill="#00274C" opacity="0.4"/>
-          <polygon points="240,360 300,420 240,460 180,420" fill="#00274C" opacity="0.3"/>
-          <line x1="240" y1="40" x2="420" y2="240" stroke="#00274C" stroke-width="0.5" opacity="0.4"/>
-          <line x1="240" y1="40" x2="60" y2="240" stroke="#00274C" stroke-width="0.5" opacity="0.4"/>
-          <line x1="240" y1="150" x2="420" y2="280" stroke="#00274C" stroke-width="0.5" opacity="0.2"/>
-          <line x1="240" y1="150" x2="60" y2="280" stroke="#00274C" stroke-width="0.5" opacity="0.2"/>
+          <polygon points="240,40 300,180 240,150 180,180" fill="#f5f3ef"/>
+          <polygon points="240,150 300,180 360,320 240,260" fill="#f5f3ef" opacity="0.7"/>
+          <polygon points="240,150 180,180 120,320 240,260" fill="#f5f3ef" opacity="0.5"/>
+          <polygon points="240,260 360,320 300,420 240,360" fill="#f5f3ef" opacity="0.6"/>
+          <polygon points="240,260 120,320 180,420 240,360" fill="#f5f3ef" opacity="0.4"/>
+          <polygon points="240,360 300,420 240,460 180,420" fill="#f5f3ef" opacity="0.3"/>
+          <line x1="240" y1="40" x2="420" y2="240" stroke="#f5f3ef" stroke-width="0.5" opacity="0.4"/>
+          <line x1="240" y1="40" x2="60" y2="240" stroke="#f5f3ef" stroke-width="0.5" opacity="0.4"/>
+          <line x1="240" y1="150" x2="420" y2="280" stroke="#f5f3ef" stroke-width="0.5" opacity="0.2"/>
+          <line x1="240" y1="150" x2="60" y2="280" stroke="#f5f3ef" stroke-width="0.5" opacity="0.2"/>
         </svg>
       </div>
       <div class="hero-location">
