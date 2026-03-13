@@ -3,184 +3,750 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ABOUT — PFALCON REALTY</title>
+<title>PFALCON REALTY — About</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:    #00274C;
+    --paper:  #f5f3ef;
+    --muted:  #8a887f;
+    --accent: #b5925a;
+    --rule:   rgba(0,39,76,0.1);
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body:    'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ════════════════════════════════
+     NAV
+  ════════════════════════════════ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    background: var(--paper);
+    border-bottom: 0.5px solid var(--rule);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    text-decoration: none;
+    gap: 2px;
+  }
+  .nav-logo-top  { font-size: 11px; font-weight: 500; letter-spacing: 0.22em; color: var(--accent); }
+  .nav-logo-bottom { font-size: 11px; font-weight: 300; letter-spacing: 0.22em; color: var(--ink); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-size: 10px; font-weight: 400; letter-spacing: 0.18em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--muted); transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--ink); }
+  .nav-cta {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--ink); border: 0.5px solid var(--ink);
+    padding: 8px 20px; transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: var(--ink); color: var(--paper); }
+
+  /* ════════════════════════════════
+     SHARED
+  ════════════════════════════════ */
+  .btn-primary {
+    display: inline-block; font-size: 10px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none; color: var(--paper);
+    background: var(--ink); padding: 14px 32px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 10px; font-weight: 400; letter-spacing: 0.18em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--muted); transition: color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--ink); }
+  .btn-secondary svg { transition: transform 0.2s; }
+  .btn-secondary:hover svg { transform: translateX(3px); }
+
+  .section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+  .section-label-line { width: 32px; height: 0.5px; background: var(--accent); }
+  .section-label-text {
+    font-size: 10px; font-weight: 400; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted);
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.25s; }
+  .reveal-delay-3 { transition-delay: 0.4s; }
+  .reveal-delay-4 { transition-delay: 0.55s; }
+
+  /* ════════════════════════════════
+     PAGE HEADER
+  ════════════════════════════════ */
+  .page-header {
+    padding-top: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 56vh;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .page-header-left {
+    padding: 72px 48px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 0.5px solid var(--rule);
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 8vw, 104px);
+    font-weight: 300;
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .page-title em { font-style: italic; color: var(--accent); }
+  .t1 { opacity: 0; animation: fadeUp 0.8s ease 0.25s forwards; display: block; }
+  .t2 { opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards; display: block; }
+  .t3 { opacity: 0; animation: fadeUp 0.8s ease 0.55s forwards; display: block; }
+
+  .header-meta {
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.7s forwards;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .header-meta-item {
+    font-size: 10px; font-weight: 400; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .header-meta-item strong { font-weight: 500; color: var(--ink); }
+
+  .page-header-right {
+    padding: 72px 48px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.45s forwards;
+  }
+  .header-intro {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-weight: 300;
+    line-height: 1.45;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+  }
+  .header-intro em { font-style: italic; color: var(--accent); }
+  .header-body {
+    font-size: 14px; font-weight: 300; line-height: 1.85;
+    color: var(--muted); max-width: 480px;
+  }
+  .header-body strong { font-weight: 500; color: var(--ink); }
+
+  /* ════════════════════════════════
+     MARKET THESIS
+  ════════════════════════════════ */
+  .thesis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .thesis-left {
+    padding: 96px 48px;
+    border-right: 0.5px solid var(--rule);
+  }
+  .thesis-heading {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4.5vw, 60px);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-top: 24px;
+    margin-bottom: 40px;
+  }
+  .thesis-heading em { font-style: italic; color: var(--accent); }
+  .thesis-body {
+    font-size: 14px; font-weight: 300; line-height: 1.9;
+    color: var(--muted); margin-bottom: 24px;
+  }
+  .thesis-body strong { font-weight: 500; color: var(--ink); }
+
+  .thesis-right {
+    padding: 96px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .thesis-stat {
+    padding: 36px 0;
+    border-bottom: 0.5px solid var(--rule);
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .thesis-stat:first-child { padding-top: 0; }
+  .thesis-stat:last-child { border-bottom: none; padding-bottom: 0; }
+  .thesis-stat-num {
+    font-family: var(--font-display);
+    font-size: 44px; font-weight: 300;
+    color: var(--ink); line-height: 1;
+  }
+  .thesis-stat-num span {
+    font-size: 20px; color: var(--accent);
+  }
+  .thesis-stat-label {
+    font-size: 11px; font-weight: 400; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted);
+    line-height: 1.6; padding-top: 8px;
+  }
+
+  /* ════════════════════════════════
+     APPROACH
+  ════════════════════════════════ */
+  .approach {
+    padding: 96px 48px;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .approach-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 80px;
+    padding-bottom: 64px;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .approach-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-top: 24px;
+  }
+  .approach-title em { font-style: italic; color: var(--accent); }
+  .approach-intro {
+    font-size: 15px; font-weight: 300; line-height: 1.85;
+    color: var(--muted); padding-top: 12px;
+  }
+  .approach-intro strong { font-weight: 500; color: var(--ink); }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .approach-item {
+    padding: 0 40px 0 0;
+    border-right: 0.5px solid var(--rule);
+  }
+  .approach-item:first-child { padding-left: 0; }
+  .approach-item:last-child { border-right: none; padding-right: 0; padding-left: 40px; }
+  .approach-item:nth-child(2),
+  .approach-item:nth-child(3) { padding-left: 40px; }
+
+  .approach-num {
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 300;
+    color: var(--accent); letter-spacing: 0.08em;
+    display: block; margin-bottom: 28px;
+  }
+  .approach-item-title {
+    font-family: var(--font-display);
+    font-size: 22px; font-weight: 300;
+    line-height: 1.2; color: var(--ink);
+    margin-bottom: 16px; letter-spacing: -0.01em;
+  }
+  .approach-item-title em { font-style: italic; color: var(--accent); }
+  .approach-item-body {
+    font-size: 12px; font-weight: 300;
+    line-height: 1.85; color: var(--muted);
+  }
+
+  /* ════════════════════════════════
+     MARKETS
+  ════════════════════════════════ */
+  .markets {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .markets-left {
+    padding: 80px 48px;
+    border-right: 0.5px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .markets-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 300; line-height: 1.05;
+    letter-spacing: -0.02em; margin-top: 24px;
+  }
+  .markets-title em { font-style: italic; color: var(--accent); }
+
+  .markets-right {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .market-item {
+    padding: 48px 40px;
+    border-left: 0.5px solid var(--rule);
+    border-bottom: 0.5px solid var(--rule);
+    transition: background 0.2s;
+  }
+  .market-item:nth-child(4),
+  .market-item:nth-child(5),
+  .market-item:nth-child(6) { border-bottom: none; }
+  .market-item:hover { background: rgba(0,39,76,0.02); }
+
+  .market-name {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 300;
+    color: var(--ink); margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .market-desc {
+    font-size: 11px; font-weight: 300;
+    line-height: 1.7; color: var(--muted);
+  }
+
+  /* ════════════════════════════════
+     VALUES STRIP
+  ════════════════════════════════ */
+  .values {
+    padding: 80px 48px;
+    border-bottom: 0.5px solid var(--rule);
+    overflow: hidden;
+  }
+  .values-ticker {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+    white-space: nowrap;
+  }
+  .value-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+  .value-word {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300; color: var(--ink);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .value-word.italic { font-style: italic; color: var(--accent); }
+  .value-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--rule);
+    flex-shrink: 0;
+  }
+
+  /* ════════════════════════════════
+     CTA
+  ════════════════════════════════ */
+  .cta-strip {
+    border-top: 0.5px solid var(--rule);
+    padding: 80px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+  }
+  .cta-copy {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 300; line-height: 1.1;
+    letter-spacing: -0.02em; max-width: 600px;
+  }
+  .cta-copy em { font-style: italic; color: var(--accent); }
+  .cta-actions { display: flex; align-items: center; gap: 32px; flex-shrink: 0; }
+
+  /* ════════════════════════════════
+     FOOTER
+  ════════════════════════════════ */
+  footer {
+    border-top: 0.5px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .footer-col { padding: 48px; border-right: 0.5px solid var(--rule); }
+  .footer-col:last-child { border-right: none; }
+  .footer-logo { display: flex; flex-direction: column; line-height: 1; gap: 2px; margin-bottom: 20px; }
+  .footer-logo-top  { font-size: 13px; font-weight: 500; letter-spacing: 0.22em; color: var(--accent); }
+  .footer-logo-bottom { font-size: 13px; font-weight: 300; letter-spacing: 0.22em; color: var(--ink); }
+  .footer-tagline { font-size: 12px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 240px; }
+  .footer-nav-label { font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+  .footer-nav { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-nav a { font-size: 13px; font-weight: 300; letter-spacing: 0.04em; color: var(--ink); text-decoration: none; transition: color 0.2s; }
+  .footer-nav a:hover { color: var(--accent); }
+  .footer-contact-label { font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+  .footer-address { font-size: 12px; font-weight: 300; line-height: 1.8; color: var(--muted); margin-bottom: 16px; }
+  .footer-phone { font-size: 13px; font-weight: 300; color: var(--ink); text-decoration: none; display: block; margin-bottom: 8px; transition: color 0.2s; }
+  .footer-phone:hover { color: var(--accent); }
+  .footer-bottom {
+    grid-column: 1 / -1;
+    border-top: 0.5px solid var(--rule);
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-copy { font-size: 9px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  .footer-license { display: flex; align-items: center; gap: 8px; font-size: 9px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  .license-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* ════════════════════════════════
+     ANIMATIONS
+  ════════════════════════════════ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ════════════════════════════════
+     RESPONSIVE
+  ════════════════════════════════ */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+
+    .page-header { grid-template-columns: 1fr; }
+    .page-header-left { padding: 56px 24px 48px; border-right: none; border-bottom: 0.5px solid var(--rule); }
+    .page-header-right { padding: 48px 24px 56px; }
+
+    .thesis { grid-template-columns: 1fr; }
+    .thesis-left { padding: 64px 24px; border-right: none; border-bottom: 0.5px solid var(--rule); }
+    .thesis-right { padding: 64px 24px; }
+
+    .approach { padding: 64px 24px; }
+    .approach-header { grid-template-columns: 1fr; gap: 24px; margin-bottom: 56px; }
+    .approach-grid { grid-template-columns: 1fr 1fr; gap: 40px 0; }
+    .approach-item { padding: 0 24px 0 0 !important; border-right: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 40px !important; }
+    .approach-item:nth-child(even) { padding-left: 24px !important; padding-right: 0 !important; border-left: 0.5px solid var(--rule); }
+    .approach-item:nth-child(3),
+    .approach-item:nth-child(4) { border-bottom: none; }
+
+    .markets { grid-template-columns: 1fr; }
+    .markets-left { padding: 56px 24px; border-right: none; border-bottom: 0.5px solid var(--rule); }
+    .markets-right { grid-template-columns: 1fr 1fr; }
+    .market-item { padding: 32px 24px; }
+
+    .values { padding: 56px 24px; }
+
+    .cta-strip { flex-direction: column; align-items: flex-start; padding: 64px 24px; }
+
+    footer { grid-template-columns: 1fr; }
+    .footer-col { border-right: none; border-bottom: 0.5px solid var(--rule); padding: 40px 24px; }
+    .footer-col:last-child { border-bottom: none; }
+    .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 8px; align-items: flex-start; }
+  }
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a href="index.html" class="wordmark">
-    <span class="wm-pf">PF</span><span class="wm-alcon">ALCON</span>
-    <span class="wm-divider"></span>
-    <span class="wm-realty">REALTY</span>
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <span class="nav-logo-top">PFALCON</span>
+    <span class="nav-logo-bottom">REALTY</span>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html">HOME</a></li>
-    <li><a href="about.html" class="active">ABOUT</a></li>
-    <li><a href="contact.html">CONTACT</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
-  <a href="contact.html" class="nav-cta">GET STARTED</a>
-  <button class="nav-toggle" aria-label="menu">
-    <span></span><span></span>
-  </button>
+  <a class="nav-cta" href="contact.html">Get Started</a>
 </nav>
 
-<div class="mobile-menu">
-  <ul>
-    <li><a href="index.html">HOME</a></li>
-    <li><a href="about.html">ABOUT</a></li>
-    <li><a href="contact.html">CONTACT</a></li>
-    <li><a href="contact.html" class="mobile-cta">GET STARTED</a></li>
-  </ul>
+<!-- ══ PAGE HEADER ══ -->
+<section class="page-header">
+  <div class="page-header-left">
+    <div>
+      <div class="section-label" style="opacity:0;animation:fadeUp 0.6s ease 0.15s forwards;">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">About PFALCON</span>
+      </div>
+      <h1 class="page-title">
+        <span class="t1">The</span>
+        <span class="t2"><em>Firm.</em></span>
+      </h1>
+    </div>
+    <div class="header-meta">
+      <div class="header-meta-item">Est. <strong>2014</strong></div>
+      <div class="header-meta-item">Royal Oak, <strong>Michigan</strong></div>
+      <div class="header-meta-item">Oakland County <strong>Market</strong></div>
+    </div>
+  </div>
+  <div class="page-header-right">
+    <p class="header-intro">
+      Southeast Michigan is <em>not a secondary market.</em><br>
+      We've known that since the day we opened.
+    </p>
+    <p class="header-body">
+      PFALCON REALTY was founded in Royal Oak in 2014 with a clear premise: Oakland County and the communities surrounding it represent one of the most underappreciated real estate markets in the Midwest. Strong employment anchors, diverse housing stock, consistent demand, and a suburban fabric that continues to attract buyers and investors who know what they're looking at.
+      <br><br>
+      <strong>We built our practice around that conviction.</strong> Over the past decade, we've served buyers, sellers, and investors across Southeast Michigan — not as a regional outpost of a national brand, but as a firm that is genuinely of this market.
+    </p>
+  </div>
+</section>
+
+<!-- ══ MARKET THESIS ══ -->
+<section class="thesis">
+  <div class="thesis-left reveal">
+    <div class="section-label">
+      <div class="section-label-line"></div>
+      <span class="section-label-text">Our Market Thesis</span>
+    </div>
+    <h2 class="thesis-heading">
+      Oakland County<br>
+      is <em>undervalued</em><br>
+      by those who<br>
+      aren't watching.
+    </h2>
+    <p class="thesis-body">
+      The Southeast Michigan market is structurally sound in ways that don't always make headlines. <strong>Major employment anchors</strong> — automotive, healthcare, technology, and professional services — create sustained demand across price bands. The region's housing stock is diverse enough to support first-time buyers, move-up buyers, and institutional investors simultaneously.
+    </p>
+    <p class="thesis-body">
+      Royal Oak and its surrounding communities sit at the intersection of urban amenity and suburban scale. That positioning is rare, and it continues to attract a buyer profile that is increasingly sophisticated — people who run the numbers, weigh commute patterns, and think about resale before they close.
+    </p>
+    <p class="thesis-body">
+      <strong>We speak that language.</strong> Every recommendation we make is grounded in the same analytical framework we'd apply to our own capital.
+    </p>
+  </div>
+  <div class="thesis-right reveal reveal-delay-1">
+    <div class="thesis-stat">
+      <div class="thesis-stat-num">10<span>+</span></div>
+      <div class="thesis-stat-label">Years of continuous market presence in Southeast Michigan</div>
+    </div>
+    <div class="thesis-stat">
+      <div class="thesis-stat-num">1<span>st</span></div>
+      <div class="thesis-stat-label">Priority: client outcomes over transaction volume, always</div>
+    </div>
+    <div class="thesis-stat">
+      <div class="thesis-stat-num">3</div>
+      <div class="thesis-stat-label">Core service lines — buyer, seller, and investment representation</div>
+    </div>
+    <div class="thesis-stat">
+      <div class="thesis-stat-num">MI</div>
+      <div class="thesis-stat-label">State-licensed and fully insured Michigan real estate brokerage</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ APPROACH ══ -->
+<section class="approach">
+  <div class="approach-header reveal">
+    <div>
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">How We Work</span>
+      </div>
+      <h2 class="approach-title">
+        The PFALCON<br>
+        <em>approach.</em>
+      </h2>
+    </div>
+    <p class="approach-intro">
+      Real estate transactions involve significant capital, compressed timelines, and asymmetric information. <strong>Our job is to close that information gap for our clients</strong> — through rigorous preparation, honest analysis, and disciplined execution at every stage of the process.
+    </p>
+  </div>
+
+  <div class="approach-grid">
+    <div class="approach-item reveal reveal-delay-1">
+      <span class="approach-num">01</span>
+      <div class="approach-item-title">Market<br><em>Intelligence</em></div>
+      <p class="approach-item-body">We track inventory, pricing trends, days-on-market, and absorption rates continuously — not just when a client engagement begins. That preparation lets us move with conviction when the right opportunity surfaces.</p>
+    </div>
+    <div class="approach-item reveal reveal-delay-2">
+      <span class="approach-num">02</span>
+      <div class="approach-item-title">Analytical<br><em>Rigor</em></div>
+      <p class="approach-item-body">Every transaction gets underwritten. For buyers, that means comp analysis, condition assessment, and a clear view of value. For sellers, it means pricing strategy grounded in data — not optimism.</p>
+    </div>
+    <div class="approach-item reveal reveal-delay-3">
+      <span class="approach-num">03</span>
+      <div class="approach-item-title">Disciplined<br><em>Negotiation</em></div>
+      <p class="approach-item-body">We negotiate from preparation, not improvisation. Knowing a market deeply — its pace, its pressure points, its typical concession patterns — is the foundation of effective advocacy at the table.</p>
+    </div>
+    <div class="approach-item reveal reveal-delay-4">
+      <span class="approach-num">04</span>
+      <div class="approach-item-title">Seamless<br><em>Execution</em></div>
+      <p class="approach-item-body">From accepted offer to closing table, we manage the process with precision. Timelines, contingencies, title, inspections — every detail is tracked so nothing delays or derails the transaction.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MARKETS ══ -->
+<section class="markets">
+  <div class="markets-left reveal">
+    <div>
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">Where We Work</span>
+      </div>
+      <h2 class="markets-title">
+        Southeast<br>
+        <em>Michigan</em><br>
+        submarkets.
+      </h2>
+    </div>
+    <p style="font-size:12px;font-weight:300;line-height:1.8;color:var(--muted);margin-top:24px;">
+      Our practice is concentrated in Oakland County and the surrounding Southeast Michigan corridor — the geography we know best.
+    </p>
+  </div>
+  <div class="markets-right">
+    <div class="market-item reveal reveal-delay-1">
+      <div class="market-name">Royal Oak</div>
+      <p class="market-desc">Our home market. Walkable urban core, strong appreciation history, diverse buyer profile from first-time to investor.</p>
+    </div>
+    <div class="market-item reveal reveal-delay-2">
+      <div class="market-name">Birmingham</div>
+      <p class="market-desc">Oakland County's premium residential market. Consistent demand, limited inventory, and a buyer profile that moves on quality.</p>
+    </div>
+    <div class="market-item reveal reveal-delay-3">
+      <div class="market-name">Troy</div>
+      <p class="market-desc">A major employment and commercial hub. Strong for move-up buyers and investors targeting consistent rental demand.</p>
+    </div>
+    <div class="market-item reveal reveal-delay-1">
+      <div class="market-name">Ferndale</div>
+      <p class="market-desc">High-velocity submarket with strong neighborhood identity and a growing owner-occupied base driving price appreciation.</p>
+    </div>
+    <div class="market-item reveal reveal-delay-2">
+      <div class="market-name">Bloomfield</div>
+      <p class="market-desc">Luxury residential corridor. Larger lot sizes, established neighborhoods, and buyers focused on long-term value retention.</p>
+    </div>
+    <div class="market-item reveal reveal-delay-3">
+      <div class="market-name">Berkley &amp; Beyond</div>
+      <p class="market-desc">The broader Oakland County submarket — including Clawson, Madison Heights, and Hazel Park — where value and momentum intersect.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VALUES STRIP ══ -->
+<section class="values reveal">
+  <div class="values-ticker">
+    <div class="value-item">
+      <span class="value-word">Analytical</span>
+      <span class="value-dot"></span>
+    </div>
+    <div class="value-item">
+      <span class="value-word italic">Precise.</span>
+      <span class="value-dot"></span>
+    </div>
+    <div class="value-item">
+      <span class="value-word">Client-First</span>
+      <span class="value-dot"></span>
+    </div>
+    <div class="value-item">
+      <span class="value-word italic">Local.</span>
+      <span class="value-dot"></span>
+    </div>
+    <div class="value-item">
+      <span class="value-word">Forward-Thinking</span>
+      <span class="value-dot"></span>
+    </div>
+    <div class="value-item">
+      <span class="value-word italic">Trusted.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<div class="cta-strip reveal">
+  <p class="cta-copy">
+    Eleven years in the market.<br>
+    <em>Ready when you are.</em>
+  </p>
+  <div class="cta-actions">
+    <a class="btn-primary" href="contact.html">Start a Conversation</a>
+    <a class="btn-secondary" href="contact.html">
+      Contact Us
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
 </div>
 
-<!-- PAGE HERO -->
-<section class="page-hero">
-  <div class="page-hero-content reveal">
-    <span class="section-tag">OUR STORY</span>
-    <h1>FORWARD-THINKING.<br><span class="headline-accent">CLIENT-FIRST.</span></h1>
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-col">
+    <div class="footer-logo">
+      <span class="footer-logo-top">PFALCON</span>
+      <span class="footer-logo-bottom">REALTY</span>
+    </div>
+    <p class="footer-tagline">Forward-thinking real estate solutions for Southeast Michigan. Est. 2014.</p>
   </div>
-  <div class="page-hero-line"></div>
-</section>
-
-<!-- MISSION -->
-<section class="mission">
-  <div class="container">
-    <div class="mission-grid">
-      <div class="mission-text reveal">
-        <h2>WHO WE ARE</h2>
-        <p class="mission-lead">PFALCON REALTY is a forward-thinking real estate firm dedicated to delivering innovative property solutions in Southeast Michigan.</p>
-        <p>We believe real estate is more than transactions — it's about helping people find the right space to build their lives and businesses. Our team brings local market expertise, strategic thinking, and an unwavering commitment to client success to every engagement.</p>
-        <p>Based in Royal Oak, MI, we serve buyers, sellers, and investors across the greater Detroit metropolitan area with professionalism, transparency, and results.</p>
-      </div>
-      <div class="mission-visual reveal reveal-delay-1">
-        <div class="mission-accent-block">
-          <div class="mab-line"></div>
-          <blockquote>
-            "Innovative property solutions built on trust, delivered with excellence."
-          </blockquote>
-          <cite>— PFALCON REALTY</cite>
-        </div>
-      </div>
-    </div>
+  <div class="footer-col">
+    <div class="footer-nav-label">Navigate</div>
+    <ul class="footer-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html">Get Started</a></li>
+    </ul>
   </div>
-</section>
-
-<!-- VALUES -->
-<section class="values-section">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-tag">WHAT WE STAND FOR</span>
-      <h2>OUR CORE VALUES</h2>
-    </div>
-    <div class="values-grid">
-      <div class="value-item reveal">
-        <div class="vi-num">I</div>
-        <h3>PROFESSIONALISM</h3>
-        <p>We hold ourselves to the highest standards in every interaction — from initial consultation to closing day.</p>
-      </div>
-      <div class="value-item reveal reveal-delay-1">
-        <div class="vi-num">II</div>
-        <h3>TRUSTWORTHINESS</h3>
-        <p>Honesty and transparency are non-negotiable. Our clients make informed decisions because we give them the full picture.</p>
-      </div>
-      <div class="value-item reveal reveal-delay-2">
-        <div class="vi-num">III</div>
-        <h3>CLIENT SUCCESS</h3>
-        <p>Your goals define our success. We don't stop working until we've delivered the outcome you came to us for.</p>
-      </div>
-      <div class="value-item reveal reveal-delay-3">
-        <div class="vi-num">IV</div>
-        <h3>INNOVATION</h3>
-        <p>We bring forward-thinking strategies to a traditional industry — leveraging modern tools and market intelligence.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- APPROACH -->
-<section class="approach">
-  <div class="approach-inner">
-    <div class="approach-label reveal">
-      <span class="section-tag">HOW WE WORK</span>
-    </div>
-    <div class="approach-steps">
-      <div class="approach-step reveal">
-        <div class="as-num">01</div>
-        <div class="as-content">
-          <h3>LISTEN FIRST</h3>
-          <p>Every engagement begins with understanding your specific situation, goals, and timeline.</p>
-        </div>
-      </div>
-      <div class="approach-step reveal reveal-delay-1">
-        <div class="as-num">02</div>
-        <div class="as-content">
-          <h3>STRATEGIZE</h3>
-          <p>We develop a tailored plan — pricing strategy, search parameters, or investment thesis — built around your needs.</p>
-        </div>
-      </div>
-      <div class="approach-step reveal reveal-delay-2">
-        <div class="as-num">03</div>
-        <div class="as-content">
-          <h3>EXECUTE WITH PRECISION</h3>
-          <p>From negotiations to paperwork, we handle every detail with expertise and attention to your best interests.</p>
-        </div>
-      </div>
-      <div class="approach-step reveal reveal-delay-3">
-        <div class="as-num">04</div>
-        <div class="as-content">
-          <h3>DELIVER RESULTS</h3>
-          <p>We measure success by yours — a seamless close, the right price, and a client who'd refer us to everyone they know.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA STRIP -->
-<section class="cta-strip reveal">
-  <div class="cta-strip-inner">
-    <div class="cta-strip-text">
-      <h2>LET'S WORK TOGETHER.</h2>
-      <p>Ready to start your real estate journey with PFALCON REALTY?</p>
-    </div>
-    <a href="contact.html" class="btn-primary btn-large">GET IN TOUCH</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="wordmark wordmark-sm">
-        <span class="wm-pf">PF</span><span class="wm-alcon">ALCON</span>
-        <span class="wm-divider"></span>
-        <span class="wm-realty">REALTY</span>
-      </div>
-      <p>Forward-thinking real estate solutions<br>for Southeast Michigan.</p>
-    </div>
-    <div class="footer-links">
-      <span class="footer-label">NAVIGATE</span>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="footer-contact">
-      <span class="footer-label">CONTACT</span>
-      <span>418 N MAIN ST, STE 200</span>
-      <span>ROYAL OAK, MI 48067</span>
-      <a href="tel:2482643635">(248) 264-3635</a>
-      <a href="http://www.pfalconrealty.com">PFALCONREALTY.COM</a>
-    </div>
+  <div class="footer-col">
+    <div class="footer-contact-label">Contact</div>
+    <p class="footer-address">418 N Main St, Ste 200<br>Royal Oak, MI 48067</p>
+    <a class="footer-phone" href="tel:2482643635">(248) 264-3635</a>
+    <a class="footer-phone" href="mailto:pmotley@pfalconrealty.com">pmotley@pfalconrealty.com</a>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 PFALCON REALTY. ALL RIGHTS RESERVED.</span>
+    <span class="footer-copy">© 2026 PFALCON Realty. All rights reserved.</span>
+    <div class="footer-license">
+      <div class="license-dot"></div>
+      Michigan Licensed Real Estate Brokerage
+    </div>
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+        observer.unobserve(el.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>

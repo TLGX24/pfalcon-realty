@@ -3,188 +3,991 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PFALCON REALTY — Royal Oak, MI</title>
+<title>PFALCON REALTY — Property Redefined</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:    #00274C;
+    --paper:  #f5f3ef;
+    --muted:  #8a887f;
+    --accent: #b5925a;
+    --rule:   rgba(0,39,76,0.1);
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body:    'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ════════════════════════════════
+     NAV
+  ════════════════════════════════ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    background: var(--paper);
+    border-bottom: 0.5px solid var(--rule);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    text-decoration: none;
+    gap: 2px;
+  }
+  .nav-logo-top {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+  }
+  .nav-logo-bottom {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    color: var(--ink);
+  }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    border: 0.5px solid var(--ink);
+    padding: 8px 20px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: var(--ink); color: var(--paper); }
+
+  /* ════════════════════════════════
+     SHARED UTILITIES
+  ════════════════════════════════ */
+  .btn-primary {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 14px 32px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--ink); }
+  .btn-secondary svg { transition: transform 0.2s; }
+  .btn-secondary:hover svg { transform: translateX(3px); }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .section-label-line { width: 32px; height: 0.5px; background: var(--accent); }
+  .section-label-text {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ════════════════════════════════
+     HERO
+  ════════════════════════════════ */
+  .hero {
+    min-height: 100vh;
+    padding-top: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+  }
+
+  .hero-left {
+    padding: 80px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 0.5px solid var(--rule);
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.2s forwards;
+  }
+  .hero-eyebrow-line { width: 32px; height: 0.5px; background: var(--accent); }
+  .hero-eyebrow-text {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero-headline { margin-top: auto; padding-top: 48px; }
+  .hero-headline h1 {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 7vw, 88px);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+  }
+  .hero-headline h1 em { font-style: italic; color: var(--accent); }
+
+  .h1-line-1 { opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards; display: block; }
+  .h1-line-2 { opacity: 0; animation: fadeUp 0.8s ease 0.50s forwards; display: block; }
+  .h1-line-3 { opacity: 0; animation: fadeUp 0.8s ease 0.65s forwards; display: block; }
+
+  .hero-sub {
+    margin-top: 40px;
+    max-width: 380px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+  .hero-sub p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  .hero-actions {
+    margin-top: 52px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.95s forwards;
+  }
+
+  .hero-right {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    overflow: hidden;
+  }
+
+  .hero-visual {
+    position: relative;
+    overflow: hidden;
+    background: #e2dfd8;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.3s forwards;
+    min-height: 400px;
+  }
+  .falcon-geo {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.08;
+  }
+  .hero-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+    background-size: 48px 48px;
+    z-index: 1;
+  }
+  .hero-location {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 1.1s forwards;
+  }
+  .hero-location-label {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .hero-location-value {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .hero-stats {
+    border-top: 0.5px solid var(--rule);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    opacity: 0;
+    animation: fadeUp 0.7s ease 1.1s forwards;
+  }
+  .stat { padding: 28px 32px; border-left: 0.5px solid var(--rule); }
+  .stat:first-child { border-left: none; }
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero-bottom {
+    grid-column: 1 / -1;
+    border-top: 0.5px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 1.3s forwards;
+  }
+  .hero-bottom-left { display: flex; align-items: center; gap: 48px; }
+  .hero-meta {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .hero-meta strong { font-weight: 500; color: var(--ink); }
+  .hero-license {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .license-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .hero-phone {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .hero-phone:hover { color: var(--ink); }
+
+  /* ════════════════════════════════
+     SERVICES
+  ════════════════════════════════ */
+  .services {
+    border-top: 0.5px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .services-left {
+    padding: 80px 48px;
+    border-right: 0.5px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .services-heading {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-top: 24px;
+  }
+  .services-heading em { font-style: italic; color: var(--accent); }
+
+  .services-right {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .service-item {
+    padding: 48px 48px;
+    border-bottom: 0.5px solid var(--rule);
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    gap: 32px;
+    align-items: start;
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .service-item:last-child { border-bottom: none; }
+  .service-item:hover { background: rgba(0,39,76,0.02); }
+
+  .service-num {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--accent);
+    padding-top: 3px;
+  }
+  .service-content {}
+  .service-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .service-desc {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 480px;
+  }
+  .service-arrow {
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    padding-top: 4px;
+  }
+  .service-item:hover .service-arrow { opacity: 1; transform: translateX(4px); }
+
+  /* ════════════════════════════════
+     WHY PFALCON
+  ════════════════════════════════ */
+  .why {
+    border-top: 0.5px solid var(--rule);
+    padding: 120px 48px;
+  }
+
+  .why-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 96px;
+    padding-bottom: 64px;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .why-header-left { display: flex; flex-direction: column; justify-content: flex-end; }
+  .why-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 68px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-top: 24px;
+  }
+  .why-title em { font-style: italic; color: var(--accent); }
+
+  .why-header-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 6px;
+  }
+  .why-intro {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 440px;
+    margin-bottom: 36px;
+  }
+  .why-intro strong { font-weight: 500; color: var(--ink); }
+
+  .years-badge { display: inline-flex; align-items: baseline; gap: 10px; }
+  .years-number {
+    font-family: var(--font-display);
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .years-label {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .pillar {
+    padding: 0 48px 0 0;
+    border-right: 0.5px solid var(--rule);
+  }
+  .pillar:first-child { padding-left: 0; }
+  .pillar:nth-child(2) { padding-left: 48px; }
+  .pillar:last-child { border-right: none; padding-left: 48px; padding-right: 0; }
+
+  .pillar-number {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 40px;
+    display: block;
+  }
+  .pillar-heading {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .pillar-heading em { font-style: italic; color: var(--accent); }
+  .pillar-body {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+  .pillar-body strong { font-weight: 500; color: var(--ink); }
+
+  .pillar-proof {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 28px;
+    border-top: 0.5px solid var(--rule);
+  }
+  .proof-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 11px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .proof-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  /* ════════════════════════════════
+     CTA STRIP
+  ════════════════════════════════ */
+  .cta-strip {
+    border-top: 0.5px solid var(--rule);
+    padding: 80px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+  }
+  .cta-copy {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    max-width: 600px;
+  }
+  .cta-copy em { font-style: italic; color: var(--accent); }
+  .cta-actions { display: flex; align-items: center; gap: 32px; flex-shrink: 0; }
+
+  /* ════════════════════════════════
+     FOOTER
+  ════════════════════════════════ */
+  footer {
+    border-top: 0.5px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .footer-col {
+    padding: 48px;
+    border-right: 0.5px solid var(--rule);
+  }
+  .footer-col:last-child { border-right: none; }
+
+  .footer-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    gap: 2px;
+    margin-bottom: 20px;
+  }
+  .footer-logo-top { font-size: 13px; font-weight: 500; letter-spacing: 0.22em; color: var(--accent); }
+  .footer-logo-bottom { font-size: 13px; font-weight: 300; letter-spacing: 0.22em; color: var(--ink); }
+
+  .footer-tagline {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 240px;
+  }
+
+  .footer-nav-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .footer-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-nav a {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-nav a:hover { color: var(--accent); }
+
+  .footer-contact-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .footer-address {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .footer-phone {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+    transition: color 0.2s;
+  }
+  .footer-phone:hover { color: var(--accent); }
+
+  .footer-bottom {
+    border-top: 0.5px solid var(--rule);
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-copy {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .footer-license {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ════════════════════════════════
+     SCROLL REVEAL
+  ════════════════════════════════ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.25s; }
+  .reveal-delay-3 { transition-delay: 0.4s; }
+
+  /* ════════════════════════════════
+     ANIMATIONS
+  ════════════════════════════════ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ════════════════════════════════
+     RESPONSIVE
+  ════════════════════════════════ */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 48px 24px; border-right: none; border-bottom: 0.5px solid var(--rule); }
+    .hero-right { min-height: 280px; }
+    .hero-stats { grid-template-columns: repeat(3, 1fr); }
+    .stat { padding: 20px 16px; }
+    .hero-bottom { padding: 16px 24px; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .hero-bottom-left { flex-direction: column; align-items: flex-start; gap: 12px; }
+
+    .services { grid-template-columns: 1fr; }
+    .services-left { padding: 48px 24px; border-right: none; border-bottom: 0.5px solid var(--rule); }
+    .services-right {}
+    .service-item { padding: 32px 24px; grid-template-columns: 32px 1fr; }
+    .service-arrow { display: none; }
+
+    .why { padding: 64px 24px; }
+    .why-header { grid-template-columns: 1fr; gap: 32px; margin-bottom: 64px; }
+    .pillars { grid-template-columns: 1fr; gap: 0; }
+    .pillar { padding: 48px 0 !important; border-right: none; border-bottom: 0.5px solid var(--rule); }
+    .pillar:last-child { border-bottom: none; }
+
+    .cta-strip { flex-direction: column; align-items: flex-start; padding: 64px 24px; }
+
+    footer { grid-template-columns: 1fr; }
+    .footer-col { border-right: none; border-bottom: 0.5px solid var(--rule); padding: 40px 24px; }
+    .footer-col:last-child { border-bottom: none; }
+    .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 8px; align-items: flex-start; }
+  }
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a href="index.html" class="wordmark">
-    <span class="wm-pf">PF</span><span class="wm-alcon">ALCON</span>
-    <span class="wm-divider"></span>
-    <span class="wm-realty">REALTY</span>
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-logo" href="#">
+    <span class="nav-logo-top">PFALCON</span>
+    <span class="nav-logo-bottom">REALTY</span>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html" class="active">HOME</a></li>
-    <li><a href="about.html">ABOUT</a></li>
-    <li><a href="contact.html">CONTACT</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
-  <a href="contact.html" class="nav-cta">GET STARTED</a>
-  <button class="nav-toggle" aria-label="menu">
-    <span></span><span></span>
-  </button>
+  <a class="nav-cta" href="contact.html">Get Started</a>
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu">
-  <ul>
-    <li><a href="index.html">HOME</a></li>
-    <li><a href="about.html">ABOUT</a></li>
-    <li><a href="contact.html">CONTACT</a></li>
-    <li><a href="contact.html" class="mobile-cta">GET STARTED</a></li>
-  </ul>
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Royal Oak, Michigan — Est. 2014</span>
+    </div>
+    <div class="hero-headline">
+      <h1>
+        <span class="h1-line-1">Property</span>
+        <span class="h1-line-2"><em>Redefined.</em></span>
+        <span class="h1-line-3">Southeast MI.</span>
+      </h1>
+      <div class="hero-sub">
+        <p>Investor-grade market analysis. Personal client service. Forward-thinking representation for buyers, sellers, and portfolio builders across Oakland County.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="btn-primary" href="contact.html">Work With Us</a>
+        <a class="btn-secondary" href="about.html">
+          Our Story
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="falcon-geo">
+        <svg width="520" height="520" viewBox="0 0 480 480" fill="none">
+          <polygon points="240,40 300,180 240,150 180,180" fill="#00274C"/>
+          <polygon points="240,150 300,180 360,320 240,260" fill="#00274C" opacity="0.7"/>
+          <polygon points="240,150 180,180 120,320 240,260" fill="#00274C" opacity="0.5"/>
+          <polygon points="240,260 360,320 300,420 240,360" fill="#00274C" opacity="0.6"/>
+          <polygon points="240,260 120,320 180,420 240,360" fill="#00274C" opacity="0.4"/>
+          <polygon points="240,360 300,420 240,460 180,420" fill="#00274C" opacity="0.3"/>
+          <line x1="240" y1="40" x2="420" y2="240" stroke="#00274C" stroke-width="0.5" opacity="0.4"/>
+          <line x1="240" y1="40" x2="60" y2="240" stroke="#00274C" stroke-width="0.5" opacity="0.4"/>
+          <line x1="240" y1="150" x2="420" y2="280" stroke="#00274C" stroke-width="0.5" opacity="0.2"/>
+          <line x1="240" y1="150" x2="60" y2="280" stroke="#00274C" stroke-width="0.5" opacity="0.2"/>
+        </svg>
+      </div>
+      <div class="hero-location">
+        <div class="hero-location-label">Market</div>
+        <div class="hero-location-value">Southeast Michigan</div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Years in Market</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">MI</div>
+        <div class="stat-label">Licensed &amp; Insured</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">Oakland</div>
+        <div class="stat-label">County Focus</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-bottom-left">
+      <div class="hero-meta"><strong>418 N Main St</strong>, Ste 200 — Royal Oak, MI 48067</div>
+      <div class="hero-license">
+        <div class="license-dot"></div>
+        Michigan Licensed Real Estate Brokerage
+      </div>
+    </div>
+    <a class="hero-phone" href="tel:2482643635">(248) 264-3635</a>
+  </div>
+</section>
+
+<!-- ══ SERVICES ══ -->
+<section class="services">
+  <div class="services-left reveal">
+    <div>
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">What We Do</span>
+      </div>
+      <h2 class="services-heading">
+        Comprehensive<br>
+        <em>real estate</em><br>
+        services.
+      </h2>
+    </div>
+    <a class="btn-secondary" href="contact.html" style="margin-top: 48px;">
+      Get Started
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+
+  <div class="services-right">
+    <div class="service-item reveal reveal-delay-1">
+      <div class="service-num">01</div>
+      <div class="service-content">
+        <div class="service-title">Buyer Representation</div>
+        <p class="service-desc">Expert guidance from search to close — with investor-level due diligence applied to every acquisition, regardless of price point.</p>
+      </div>
+      <div class="service-arrow">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M10 4l5 5-5 5" stroke="var(--muted)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+    <div class="service-item reveal reveal-delay-2">
+      <div class="service-num">02</div>
+      <div class="service-content">
+        <div class="service-title">Seller Representation</div>
+        <p class="service-desc">Strategic pricing grounded in real market data, professional marketing execution, and disciplined negotiation to maximize your return.</p>
+      </div>
+      <div class="service-arrow">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M10 4l5 5-5 5" stroke="var(--muted)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+    <div class="service-item reveal reveal-delay-3">
+      <div class="service-num">03</div>
+      <div class="service-content">
+        <div class="service-title">Investment &amp; Portfolio</div>
+        <p class="service-desc">Identify, underwrite, and close high-value opportunities in Southeast Michigan's dynamic market — with a team that thinks like an investor.</p>
+      </div>
+      <div class="service-arrow">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M10 4l5 5-5 5" stroke="var(--muted)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY PFALCON ══ -->
+<section class="why">
+  <div class="why-header reveal">
+    <div class="why-header-left">
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">Why PFALCON</span>
+      </div>
+      <h2 class="why-title">
+        Built on a<br>decade of<br><em>local depth.</em>
+      </h2>
+    </div>
+    <div class="why-header-right">
+      <p class="why-intro">
+        Most real estate firms offer the same thing — a license, a lockbox, and a listing. PFALCON is built differently. <strong>Since 2014, we've operated at the intersection of client advocacy and investment intelligence</strong> in one of Michigan's most competitive suburban markets.
+      </p>
+      <div class="years-badge">
+        <span class="years-number">10+</span>
+        <span class="years-label">Years in Southeast Michigan</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar reveal reveal-delay-1">
+      <span class="pillar-number">01</span>
+      <h3 class="pillar-heading">Rooted in<br><em>Royal Oak.</em></h3>
+      <p class="pillar-body">We don't work Southeast Michigan from a distance. Our office is on N Main Street — in the market, every day. That proximity means faster reads on inventory, pricing shifts, and the off-market intelligence that moves deals before they hit Zillow.</p>
+      <div class="pillar-proof">
+        <div class="proof-item"><div class="proof-dot"></div><span>Oakland County market presence since 2014</span></div>
+        <div class="proof-item"><div class="proof-dot"></div><span>418 N Main St — Royal Oak, MI 48067</span></div>
+        <div class="proof-item"><div class="proof-dot"></div><span>Deep network across Southeast Michigan submarkets</span></div>
+      </div>
+    </div>
+
+    <div class="pillar reveal reveal-delay-2">
+      <span class="pillar-number">02</span>
+      <h3 class="pillar-heading">Investor<br><em>perspective.</em></h3>
+      <p class="pillar-body">We underwrite every transaction the way an investor would — with attention to cap rates, comps, carry costs, and exit scenarios. Whether you're buying a first home or building a portfolio, <strong>you get analysis, not assumptions.</strong></p>
+      <div class="pillar-proof">
+        <div class="proof-item"><div class="proof-dot"></div><span>Buy-side due diligence on every acquisition</span></div>
+        <div class="proof-item"><div class="proof-dot"></div><span>Portfolio strategy for multi-property clients</span></div>
+        <div class="proof-item"><div class="proof-dot"></div><span>Market data — not gut feel — driving every recommendation</span></div>
+      </div>
+    </div>
+
+    <div class="pillar reveal reveal-delay-3">
+      <span class="pillar-number">03</span>
+      <h3 class="pillar-heading">Results you<br><em>can verify.</em></h3>
+      <p class="pillar-body">We don't ask you to take our word for it. Our track record in Southeast Michigan speaks through closed transactions, client outcomes, and a repeat-referral business that's grown consistently since our founding. <strong>Forward-thinking isn't a tagline — it's how we operate.</strong></p>
+      <div class="pillar-proof">
+        <div class="proof-item"><div class="proof-dot"></div><span>Consistent client referral pipeline since 2014</span></div>
+        <div class="proof-item"><div class="proof-dot"></div><span>Michigan licensed and fully insured brokerage</span></div>
+        <div class="proof-item"><div class="proof-dot"></div><span>Buyer, seller, and investment representation</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA STRIP ══ -->
+<div class="cta-strip reveal">
+  <p class="cta-copy">Ready to work with a team that treats your transaction like <em>their own investment?</em></p>
+  <div class="cta-actions">
+    <a class="btn-primary" href="contact.html">Start a Conversation</a>
+    <a class="btn-secondary" href="about.html">
+      Our Story
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg">
-    <div class="hero-grid"></div>
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-col">
+    <div class="footer-logo">
+      <span class="footer-logo-top">PFALCON</span>
+      <span class="footer-logo-bottom">REALTY</span>
+    </div>
+    <p class="footer-tagline">Forward-thinking real estate solutions for Southeast Michigan. Est. 2014.</p>
   </div>
-  <div class="hero-content">
-    <div class="hero-eyebrow reveal">ROYAL OAK, MICHIGAN</div>
-    <h1 class="hero-headline reveal reveal-delay-1">
-      PROPERTY<br>
-      <span class="headline-accent">REDEFINED.</span>
-    </h1>
-    <p class="hero-sub reveal reveal-delay-2">
-      Forward-thinking real estate solutions built on<br>
-      professionalism, trust, and your success.
-    </p>
-    <div class="hero-actions reveal reveal-delay-3">
-      <a href="contact.html" class="btn-primary">WORK WITH US</a>
-      <a href="about.html" class="btn-ghost">OUR STORY →</a>
-    </div>
+  <div class="footer-col">
+    <div class="footer-nav-label">Navigate</div>
+    <ul class="footer-nav">
+      <li><a href="#">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html">Get Started</a></li>
+    </ul>
   </div>
-  <div class="hero-stat-bar reveal reveal-delay-4">
-    <div class="stat">
-      <span class="stat-num">418</span>
-      <span class="stat-label">N MAIN ST, STE 200</span>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat">
-      <span class="stat-num">(248)</span>
-      <span class="stat-label">264-3635</span>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat">
-      <span class="stat-num">MI</span>
-      <span class="stat-label">LICENSED & INSURED</span>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="services">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-tag">WHAT WE DO</span>
-      <h2>COMPREHENSIVE<br>REAL ESTATE SERVICES</h2>
-    </div>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <div class="service-num">01</div>
-        <h3>BUYER REPRESENTATION</h3>
-        <p>Expert guidance through every step of the home buying process — from search to close.</p>
-        <div class="service-line"></div>
-      </div>
-      <div class="service-card reveal reveal-delay-1">
-        <div class="service-num">02</div>
-        <h3>SELLER REPRESENTATION</h3>
-        <p>Strategic pricing, professional marketing, and negotiation to maximize your return.</p>
-        <div class="service-line"></div>
-      </div>
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-num">03</div>
-        <h3>PROPERTY INVESTMENT</h3>
-        <p>Identify high-value opportunities in Southeast Michigan's dynamic real estate market.</p>
-        <div class="service-line"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- VALUE PROP -->
-<section class="value">
-  <div class="value-inner">
-    <div class="value-text reveal">
-      <span class="section-tag">WHY PFALCON</span>
-      <h2>BUILT ON TRUST.<br>DRIVEN BY RESULTS.</h2>
-      <p>At PFALCON REALTY, we combine local expertise with a forward-thinking approach to deliver exceptional results for every client — whether you're buying your first home or expanding your investment portfolio.</p>
-      <a href="about.html" class="btn-primary" style="margin-top:2rem;display:inline-block;">LEARN MORE</a>
-    </div>
-    <div class="value-visual reveal reveal-delay-1">
-      <div class="value-card">
-        <div class="vc-accent"></div>
-        <div class="vc-content">
-          <div class="vc-icon">◈</div>
-          <h4>INNOVATIVE SOLUTIONS</h4>
-          <p>Modern strategies for a modern market.</p>
-        </div>
-      </div>
-      <div class="value-card offset">
-        <div class="vc-accent"></div>
-        <div class="vc-content">
-          <div class="vc-icon">◇</div>
-          <h4>CLIENT-FIRST APPROACH</h4>
-          <p>Your goals are our north star.</p>
-        </div>
-      </div>
-      <div class="value-card">
-        <div class="vc-accent"></div>
-        <div class="vc-content">
-          <div class="vc-icon">○</div>
-          <h4>LOCAL EXPERTISE</h4>
-          <p>Deep roots in Southeast Michigan.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA STRIP -->
-<section class="cta-strip reveal">
-  <div class="cta-strip-inner">
-    <div class="cta-strip-text">
-      <h2>READY TO FIND YOUR NEXT PROPERTY?</h2>
-      <p>Let's start a conversation about your real estate goals.</p>
-    </div>
-    <a href="contact.html" class="btn-primary btn-large">CONTACT US TODAY</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="wordmark wordmark-sm">
-        <span class="wm-pf">PF</span><span class="wm-alcon">ALCON</span>
-        <span class="wm-divider"></span>
-        <span class="wm-realty">REALTY</span>
-      </div>
-      <p>Forward-thinking real estate solutions<br>for Southeast Michigan.</p>
-    </div>
-    <div class="footer-links">
-      <span class="footer-label">NAVIGATE</span>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="footer-contact">
-      <span class="footer-label">CONTACT</span>
-      <span>418 N MAIN ST, STE 200</span>
-      <span>ROYAL OAK, MI 48067</span>
-      <a href="tel:2482643635">(248) 264-3635</a>
-      <a href="http://www.pfalconrealty.com">PFALCONREALTY.COM</a>
-    </div>
+  <div class="footer-col">
+    <div class="footer-contact-label">Contact</div>
+    <p class="footer-address">418 N Main St, Ste 200<br>Royal Oak, MI 48067</p>
+    <a class="footer-phone" href="tel:2482643635">(248) 264-3635</a>
+    <a class="footer-phone" href="mailto:pmotley@pfalconrealty.com">pmotley@pfalconrealty.com</a>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 PFALCON REALTY. ALL RIGHTS RESERVED.</span>
+    <span class="footer-copy">© 2026 PFALCON Realty. All rights reserved.</span>
+    <div class="footer-license">
+      <div class="license-dot"></div>
+      Michigan Licensed Real Estate Brokerage
+    </div>
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+        observer.unobserve(el.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
